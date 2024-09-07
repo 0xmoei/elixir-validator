@@ -87,19 +87,13 @@ docker run -d \
 ```
 
 ## 6- Check Validator Status
-1. **List Docker Containers**:
-* Copy `elixirprotocol/validator:v3` CONTAINER ID
+1. **Validator Logs**:
 ```
-docker ps -a
-```
-
-2. **Check Container Logs (Replace CONTAINER_ID)**:
-```
-docker logs -f CONTAINER_ID
+docker logs -f elixir
 ```
 > Verify connectivity in the logs.  It may take a minute or so for the first authorization to complete and for messages to start coming in.
 
-3. **Check Validator Health**:
+2. **Validator Health Status**:
 ```
 curl 127.0.0.1:17690/health | jq
 ```
