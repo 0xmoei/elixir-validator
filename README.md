@@ -49,12 +49,12 @@ Create an EVM metamask wallet and write its private and public keys
 
 ## 5- Running Your Validator
 
-Download `validator.env`
+1- **Download `validator.env`**:
 ```
 wget https://raw.githubusercontent.com/0xmoei/elixir-validator/main/validator.env?token=GHSAT0AAAAAACVWEIZOVZJKZTBXY4ITUZUKZW4XSIA
 ```
 
-Config `validator.env`
+2- **Config `validator.env`**:
 ```
 nano validator.env
 ```
@@ -63,17 +63,35 @@ nano validator.env
 * `SIGNER_PRIVATE_KEY`: Your Wallet Private Key
 > `Ctrl+X+Y+ENTER` to save and exit
 
-
-1. **Pull the docker images**
+3. **Pull the docker images**
 ```console
 docker pull elixirprotocol/validator:v3
 ```
 
-2. **Run Validator**
+4. **Run Validator**
 ```
 docker run -d \
-  --env-file /path/to/validator.env \
+  --env-file ./validator.env \
   --name elixir \
   --restart unless-stopped \
+  -p 17690:17690 \
   elixirprotocol/validator:v3
 ```
+
+
+## Upgrading your validator
+Team updates the validators frequently (always check discord), so you need to upgrade it using following commands
+```
+docker kill elixir
+docker rm elixir
+docker pull elixirprotocol/validator:v3
+```
+```
+docker run -d \
+  --env-file ./validator.env \
+  --name elixir \
+  --restart unless-stopped \
+  -p 17690:17690 \
+  elixirprotocol/validator:v3
+```
+
