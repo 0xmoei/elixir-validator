@@ -49,6 +49,21 @@ Create an EVM metamask wallet and write its private and public keys
 
 ## 5- Running Your Validator
 
+Download `validator.env`
+```
+wget https://raw.githubusercontent.com/0xmoei/elixir-validator/main/validator.env?token=GHSAT0AAAAAACVWEIZOVZJKZTBXY4ITUZUKZW4XSIA
+```
+
+Config `validator.env`
+```
+nano validator.env
+```
+* `STRATEGY_EXECUTOR_DISPLAY_NAME`: Your Validator Name
+* `STRATEGY_EXECUTOR_BENEFICIARY`: Your Wallet Public Key
+* `SIGNER_PRIVATE_KEY`: Your Wallet Private Key
+> `Ctrl+X+Y+ENTER` to save and exit
+
+
 1. **Pull the docker images**
 ```console
 docker pull elixirprotocol/validator:v3
