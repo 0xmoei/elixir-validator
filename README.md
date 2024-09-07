@@ -1,4 +1,4 @@
-# elixir-validator
+# Elixir-Validator
 
 
 ## System Requirements (Minimum-Recommended)
@@ -50,12 +50,12 @@ Create an EVM metamask wallet and write its private and public keys
 ## 5- Running Your Validator
 
 1- **Download `validator.env`**:
-```
-wget https://raw.githubusercontent.com/0xmoei/elixir-validator/main/validator.env?token=GHSAT0AAAAAACVWEIZOVZJKZTBXY4ITUZUKZW4XSIA
+```console
+wget https://raw.githubusercontent.com/0xmoei/elixir-validator/main/validator.env?token=GHSAT0AAAAAACVWEIZOVZJKZTBXY4ITUZUKZW4XSIA -O validator.env
 ```
 
 2- **Config `validator.env`**:
-```
+```console
 nano validator.env
 ```
 * `STRATEGY_EXECUTOR_DISPLAY_NAME`: Your Validator Name
@@ -69,7 +69,7 @@ docker pull elixirprotocol/validator:v3
 ```
 
 4. **Run Validator**
-```
+```console
 docker run -d \
   --env-file ./validator.env \
   --name elixir \
@@ -78,15 +78,35 @@ docker run -d \
   elixirprotocol/validator:v3
 ```
 
+## 6- Check Validator Status
+1. **List Docker Containers**:
+* Copy `elixirprotocol/validator:v3` CONTAINER ID
+```
+docker ps -a
+```
+
+2. **Check Container Logs (Replace CONTAINER_ID)**:
+```
+docker logs -f CONTAINER_ID
+```
+> Verify connectivity in the logs.  It may take a minute or so for the first authorization to complete and for messages to start coming in.
+
+3. **Check Validator Health**:
+```
+curl 127.0.0.1:17690/health | jq
+```
+Response: "OK"
+
+
 
 ## Upgrading your validator
 Team updates the validators frequently (always check discord), so you need to upgrade it using following commands
-```
+```console
 docker kill elixir
 docker rm elixir
-docker pull elixirprotocol/validator:v3
+docker pull elixirprotocol/validator:v3 --platform linux/amd64
 ```
-```
+```console
 docker run -d \
   --env-file ./validator.env \
   --name elixir \
